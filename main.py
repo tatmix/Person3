@@ -7,10 +7,17 @@ def main():
         ["Сотрудники, имеющие оклад < 35000", fw.sallt35k],
         ["Сотрудники, имеющие максимальный оклад", fw.salmax],
         ["Сотрудники, имеющие минимальный оклад", fw.salmin],
-        ["Средний оклад", fw.salmiddle]
+        ["Средний оклад", fw.salmiddle],
+        ["Сохранение", fw.save],
+        ["Загрузка", fw.load],
+        ["Сохранить в формате txt", fw.save_txt],
+        ["Сохранить по технике json", fw.save_data],
+        ["загрузка по технике json", fw.load_data]
     ]
     while True:
-        create_menu(sys_adms, act)
+        tmp = create_menu(sys_adms, act)
+        if not (tmp is None):
+            sys_adms = tmp
 
 def create_menu(kwargs, actions):
     print("Меню:")
@@ -22,7 +29,8 @@ def create_menu(kwargs, actions):
         if answ -1 >= len(actions) or answ -1 < 0:
             print("Неверный пункт!")
             return
-        actions[answ - 1][1](kwargs)
+        works = actions[answ - 1][1](kwargs)
+        return works
     except Exception as e:
         print("Error =>", e)
     print()
